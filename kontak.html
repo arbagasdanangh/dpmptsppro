@@ -45,6 +45,17 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        /* Penyesuaian untuk Gambar Portrait */
+.card-main img {
+    object-fit: cover;
+    object-position: center 20%; /* Memastikan bagian atas gambar (wajah/kepala) lebih terlihat */
+}
+
+@media (min-width: 1024px) {
+    /* Mengubah proporsi: Main card 7 kolom, Side card 5 kolom agar lebih seimbang untuk portrait */
+    .card-main { grid-column: span 7; height: 600px; } 
+    .card-side { grid-column: span 5; height: 600px; }
+}
     </style>
 <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -359,7 +370,49 @@
             <p class="text-slate-400 text-lg max-w-2xl mx-auto">Akses cepat berita terbaru dan berbagai inovasi layanan digital DPMPTSP Surabaya.</p>
         </div>
     </section>
+<section class="container mx-auto px-6 -mt-16 pb-16">
+    <div class="collage-container">
+        <div class="card-main news-card-tilt shadow-2xl" data-tilt data-tilt-max="5">
+            <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" 
+                 class="absolute inset-0 w-full h-full object-cover object-top" 
+                 alt="Portrait Content">
+            <div class="image-overlay"></div>
+            <div class="absolute bottom-0 p-8 md:p-12 z-20">
+                <span class="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold mb-4 inline-block shadow-lg">
+                    BERITA UTAMA
+                </span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+                    Peningkatan Investasi Surabaya 2026: Capaian Target Semester I
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base line-clamp-2">
+                    Analisis mendalam mengenai pertumbuhan ekonomi dan sektor unggulan di Kota Surabaya.
+                </p>
+            </div>
+        </div>
 
+        <div class="card-side">
+            <div class="h-1/2 news-card-tilt bg-slate-900 flex flex-col justify-end" data-tilt>
+                <div class="p-8">
+                    <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest">Pengumuman</span>
+                    <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">
+                        Panduan Terbaru Pengurusan Izin Usaha Mikro & Kecil
+                    </h3>
+                    <div class="mt-4 w-12 h-1 bg-yellow-400 rounded"></div>
+                </div>
+            </div>
+            
+            <div class="h-1/2 news-card-tilt bg-blue-700 flex flex-col justify-end" data-tilt>
+                <div class="p-8">
+                    <span class="text-white/70 text-xs font-bold uppercase tracking-widest">Data Statistik</span>
+                    <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">
+                        Rekapitulasi Layanan DPMPTSP Bulan Maret 2026
+                    </h3>
+                    <div class="mt-4 w-12 h-1 bg-white/30 rounded"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="py-16 bg-white"> <div class="container mx-auto px-4"> <div class="text-center mb-12"> <div class="flex items-center justify-center mb-6"> <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"> <i class="fas fa-lightbulb text-white text-xl"></i> </div> <h2 class="text-3xl font-bold text-blue-800">Inovasi Layanan</h2> </div> <p class="text-gray-600 max-w-2xl mx-auto">Berbagai inovasi layanan yang dikembangkan untuk meningkatkan kualitas pelayanan kepada masyarakat</p> </div> <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"> <!-- Lapis Lupis --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/lapis_lupis_baru.png" alt="Lapis Lupis" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Lapis Lupis</h4> </div> </a> <!-- MPP Virtual --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://mpp.surabaya.go.id/mppvirtual/skin/Image_7DB3C373_7065_34DE_41BA_CF5206137DED.png?v=1696700959324" alt="MPP Virtual" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">MPP Virtual</h4> </div> </a> <!-- Pesona Buaya --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/Pesona%20Buaya.png" alt="Pesona Buaya" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Pesona Buaya</h4> </div> </a> <!-- WPP --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/WPP.png" alt="WPP" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">WPP</h4> </div> </a> <!-- Takon Sobat --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/TAKON-SOBAT.png" alt="Takon Sobat" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Takon Sobat</h4> </div> </a> <!-- Wani Ngurus Izin --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/Wani%20Ngurus%20Izin.jpeg" alt="Wani Ngurus Izin" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Wani Ngurus Izin</h4> </div> </a> </div> </div> </section>
 
    
