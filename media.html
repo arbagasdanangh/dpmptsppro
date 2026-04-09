@@ -48,8 +48,313 @@
             overflow: hidden;
         }
     </style>
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+    <style>
+        /* --- CORE COLLAGE LAYOUT --- */
+        .collage-wrapper {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 350px);
+            gap: 1.5rem;
+        }
+
+        .card-main { grid-column: span 8; grid-row: span 2; }
+        .card-sub { grid-column: span 4; grid-row: span 1; }
+
+        @media (max-width: 1024px) {
+            .collage-wrapper { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .card-main, .card-sub { grid-column: span 1; height: 450px; }
+        }
+
+        /* --- TILT CARD STYLE --- */
+        .news-card-tilt {
+            position: relative;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            background: #0f172a;
+            cursor: pointer;
+            transform-style: preserve-3d; /* Penting untuk efek 3D */
+        }
+
+        .image-bg-tilt {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: all 0.6s ease;
+        }
+
+        .news-card-tilt:hover .image-bg-tilt {
+            opacity: 0.6;
+            transform: scale(1.1);
+        }
+
+        .content-area-tilt {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 70%);
+            transform: translateZ(50px); /* Membuat teks melayang */
+        }
+
+        /* --- LAYER TEXT DECORATION --- */
+        .bg-layer-blue {
+            background: #0ea5e9;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            font-weight: 800;
+        }
+
+        .bg-layer-yellow {
+            background: #fbbf24;
+            color: #000;
+            padding: 0.2rem 0.8rem;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            font-weight: 800;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+<style>
+    /* Animasi melayang yang lebih halus */
+    @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-15px) scale(1.02); }
+    }
+    .animate-bounce-slow {
+        animation: bounce-slow 4s infinite ease-in-out;
+    }
+
+    /* Efek gradasi bergerak pada teks */
+    .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-move 5s ease infinite;
+    }
+    @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        
+        /* --- SLIDER CORE --- */
+        #slide-track { transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1); }
+        .active-slide img { animation: kenburns 20s infinite alternate; }
+        @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.2) translate(20px, 10px); } }
+        
+        .slide-content > * {
+            opacity: 0; transform: translateY(40px) skewY(2deg);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .active-slide .slide-content > * { opacity: 1; transform: translateY(0) skewY(0deg); }
+        .active-slide .slide-content h2 { transition-delay: 0.3s; }
+        .active-slide .slide-content p { transition-delay: 0.5s; }
+        .active-slide .slide-content .btn-group { transition-delay: 0.7s; }
+
+        .indicator-bar { height: 4px; width: 40px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; border-radius: 2px; }
+        .indicator-progress { position: absolute; height: 100%; width: 0; background: #FFD41D; transition: width 0.1s linear; }
+
+        /* --- COLLAGE NEWS SECTION --- */
+        .collage-wrapper {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 350px);
+            gap: 1.5rem;
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        .card-main { grid-column: span 8; grid-row: span 2; }
+        .card-sub { grid-column: span 4; grid-row: span 1; }
+
+        .news-card-tilt {
+            position: relative; border-radius: 2.5rem; overflow: hidden;
+            background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s;
+            cursor: pointer; box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.15);
+        }
+
+        .bg-layer-blue { background: #0ea5e9; color: white; padding: 0.2rem 0.8rem; box-decoration-break: clone; -webkit-box-decoration-break: clone; font-weight: 800; }
+        .bg-layer-yellow { background: #fbbf24; color: #000; padding: 0.2rem 0.8rem; box-decoration-break: clone; -webkit-box-decoration-break: clone; font-weight: 800; }
+
+        .image-bg-tilt {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.35; filter: grayscale(40%) contrast(1.1); transition: all 0.7s ease;
+        }
+        .news-card-tilt:hover .image-bg-tilt { opacity: 0.55; filter: grayscale(0%); transform: scale(1.1); }
+
+        .content-area-tilt {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 2.5rem;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, transparent 70%);
+        }
+
+        @media (max-width: 1024px) {
+            .collage-wrapper { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .card-main, .card-sub { grid-column: span 1; height: 400px; }
+        }
+    </style>
+    <style>
+    .bg-layer-blue {
+        background: #0ea5e9;
+        color: white;
+        /* Tambahkan padding kiri-kanan dan atur jarak antar baris */
+        padding: 0.4rem 1rem; 
+        line-height: 1.8; /* Biar antar baris ada spasi, nggak mepet */
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        font-weight: 800;
+        display: inline; /* Penting biar padding-nya konsisten di tiap baris */
+    }
+    
+    /* Area konten kita kasih padding lebih besar agar tidak mepet frame */
+    .content-area-tilt {
+        padding: 3.5rem !important; 
+    }
+</style>
 </head>
-<body>
+
+<body class="antialiased">
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-[100] bg-white/95 backdrop-blur-xl transition-all duration-300 border-b-4 border-blue-900">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center relative">
+        
+        <div class="flex items-center">
+            <img src="https://github.com/arbagasdanangh/pps/blob/main/logo.png?raw=true" class="h-12" alt="Logo DPMPTSP">
+        </div>
+
+        <nav class="hidden lg:flex items-center h-full">
+            <ul class="flex items-center h-full">
+                <li class="h-full flex items-center px-3 relative group">
+                    <a href="index.php" class="text-[11px] font-black text-blue-900 uppercase tracking-widest relative h-full flex items-center">
+                        BERANDA
+                        <span class="absolute -bottom-1 left-0 w-full h-1 bg-blue-900"></span>
+                    </a>
+                </li>
+
+                <li class="h-full flex items-center px-3 relative group">
+                    <button class="flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-blue-900 uppercase tracking-widest transition">
+                        TENTANG KAMI <i class="fas fa-chevron-down text-[8px] ml-1"></i>
+                    </button>
+                    <div class="absolute top-full left-0 w-64 bg-[#6ea1d4] opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 shadow-2xl">
+                        <div class="flex flex-col">
+                            <a href="tentang.php#gambar-sec" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">GAMBARAN DPM-PTSP</a>
+                            <a href="tentang.php#stdjenis-sec" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">VISI DAN MISI</a>
+                            <a href="tentang.php#faq-sec" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">FAQ</a>
+                            <a href="tentang.php#kontak-sec" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] uppercase">HUBUNGI KAMI</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="h-full flex items-center px-3 relative group">
+                    <button class="flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-blue-900 uppercase tracking-widest transition">
+                        INVESTASI <i class="fas fa-chevron-down text-[8px] ml-1"></i>
+                    </button>
+                    <div class="absolute top-full left-0 w-64 bg-[#6ea1d4] opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 shadow-2xl">
+                        <div class="flex flex-col">
+                            <a href="investasi.php#Peta" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">MULAI USAHA</a>
+                            <a href="investasi.php#Panduan" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">LINK TERKAIT</a>
+                            <a href="investasi.php#Kinerja" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] uppercase">KINERJA</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="h-full flex items-center px-3">
+                    <a href="aplikasi.php" class="text-[11px] font-bold text-slate-600 hover:text-blue-900 uppercase tracking-widest transition">APLIKASI</a>
+                </li>
+                
+                <li class="h-full flex items-center px-3">
+                    <a href="pelayanan.php" class="text-[11px] font-bold text-slate-600 hover:text-blue-900 uppercase tracking-widest transition">PELAYANAN</a>
+                </li>
+
+                <li class="h-full flex items-center px-3 relative group">
+                    <button class="flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-blue-900 uppercase tracking-widest transition">
+                        INFORMASI <i class="fas fa-chevron-down text-[8px] ml-1"></i>
+                    </button>
+                    <div class="absolute top-full left-0 w-64 bg-[#6ea1d4] opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 shadow-2xl">
+                        <div class="flex flex-col">
+                            <a href="galeri.php" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">FOTO</a>
+                            <a href="media.html" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] border-b border-white/10 uppercase">BERITA</a>
+                            <a href="video.php" class="px-6 py-4 text-[10px] font-bold text-white hover:bg-[#5a8bb8] uppercase">VIDEO</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="h-full flex items-center px-3">
+                    <a href="faq.php" class="text-[11px] font-bold text-slate-600 hover:text-blue-900 uppercase tracking-widest transition">KONTAK</a>
+                </li>
+            </ul>
+        </nav>
+
+        <button id="mobile-btn" class="lg:hidden flex flex-col gap-1.5 items-center justify-center w-10 h-10 bg-blue-50 rounded-xl">
+            <span class="w-6 h-0.5 bg-blue-900 transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-blue-900 transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-blue-900 transition-all duration-300"></span>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-200 max-h-0 overflow-hidden transition-all duration-500 ease-in-out shadow-2xl">
+        <nav class="p-6 space-y-2">
+            <a href="index.php" class="block py-3 text-xs font-black text-blue-900 uppercase tracking-widest border-b border-slate-50">BERANDA</a>
+            
+            <div class="border-b border-slate-50">
+                <button onclick="toggleMobileSub('sub-tentang')" class="flex justify-between items-center w-full py-3 text-xs font-bold text-slate-600 uppercase tracking-widest">
+                    TENTANG KAMI <i class="fas fa-chevron-down text-[8px]" id="icon-tentang"></i>
+                </button>
+                <div id="sub-tentang" class="hidden flex-col bg-slate-50 rounded-lg mb-2 overflow-hidden">
+                    <a href="tentang.php#gambar-sec" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase">GAMBARAN DPM-PTSP</a>
+                    <a href="tentang.php#stdjenis-sec" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase">VISI DAN MISI</a>
+                    <a href="tentang.php#faq-sec" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase border-t border-white">FAQ</a>
+                </div>
+            </div>
+
+            <div class="border-b border-slate-50">
+                <button onclick="toggleMobileSub('sub-investasi')" class="flex justify-between items-center w-full py-3 text-xs font-bold text-slate-600 uppercase tracking-widest">
+                    INVESTASI <i class="fas fa-chevron-down text-[8px]" id="icon-investasi"></i>
+                </button>
+                <div id="sub-investasi" class="hidden flex-col bg-slate-50 rounded-lg mb-2">
+                    <a href="investasi.php#Peta" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase">MULAI USAHA</a>
+                    <a href="investasi.php#Panduan" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase border-t border-white">LINK TERKAIT</a>
+                </div>
+            </div>
+
+            <a href="aplikasi.php" class="block py-3 text-xs font-bold text-slate-600 uppercase tracking-widest border-b border-slate-50">APLIKASI</a>
+            <a href="pelayanan.php" class="block py-3 text-xs font-bold text-slate-600 uppercase tracking-widest border-b border-slate-50">PELAYANAN</a>
+
+            <div class="border-b border-slate-50">
+                <button onclick="toggleMobileSub('sub-informasi')" class="flex justify-between items-center w-full py-3 text-xs font-bold text-slate-600 uppercase tracking-widest">
+                    INFORMASI <i class="fas fa-chevron-down text-[8px]" id="icon-informasi"></i>
+                </button>
+                <div id="sub-informasi" class="hidden flex-col bg-slate-50 rounded-lg mb-2">
+                    <a href="galeri.php" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase">FOTO</a>
+                    <a href="media.html" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase border-t border-white">BERITA</a>
+                    <a href="video.php" class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase border-t border-white">VIDEO</a>
+                </div>
+            </div>
+
+            <a href="faq.php" class="block py-3 text-xs font-bold text-slate-600 uppercase tracking-widest">KONTAK</a>
+            
+            <a href="faq.php" class="block w-full py-4 mt-4 bg-blue-900 text-white text-center text-[10px] font-black rounded-xl shadow-lg">HUBUNGI KAMI</a>
+        </nav>
+    </div>
+</header>
+
 
     <section class="hero-mesh pt-32 pb-48 px-6 relative">
         <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-500/20 blur-[120px] rounded-full"></div>
