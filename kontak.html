@@ -218,6 +218,45 @@
             .collage-wrapper { grid-template-columns: 1fr; grid-template-rows: auto; }
             .card-main, .card-sub { grid-column: span 1; height: 400px; }
         }
+           body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        
+        /* Glass Effect */
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+
+        /* Hero Mesh */
+        .hero-mesh {
+            background: radial-gradient(circle at 0% 0%, #0f172a 0%, #1e293b 100%);
+            position: relative; overflow: hidden;
+        }
+
+        /* Collage Engine */
+        .collage-container { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+        .card-main { grid-column: span 8; height: 500px; }
+        .card-side { grid-column: span 4; display: flex; flex-direction: column; gap: 1.5rem; }
+        
+        @media (max-width: 1024px) {
+            .card-main, .card-side { grid-column: span 12; height: auto; }
+            .card-sub { height: 300px; }
+        }
+
+        /* Interactive Cards */
+        .news-card-tilt, .innovation-card {
+            position: relative; border-radius: 2rem; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+        }
+
+        .innovation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1);
+            border-color: #fbbf24;
+        }
+
+        .image-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 70%);
+            z-index: 10;
+        }
     </style>
     <style>
     .bg-layer-blue {
@@ -370,49 +409,32 @@
             <p class="text-slate-400 text-lg max-w-2xl mx-auto">Akses cepat berita terbaru dan berbagai inovasi layanan digital DPMPTSP Surabaya.</p>
         </div>
     </section>
-<section class="container mx-auto px-6 -mt-16 pb-16">
-    <div class="collage-container">
-        <div class="card-main news-card-tilt shadow-2xl" data-tilt data-tilt-max="5">
-            <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" 
-                 class="absolute inset-0 w-full h-full object-cover object-top" 
-                 alt="Portrait Content">
-            <div class="image-overlay"></div>
-            <div class="absolute bottom-0 p-8 md:p-12 z-20">
-                <span class="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold mb-4 inline-block shadow-lg">
-                    BERITA UTAMA
-                </span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
-                    Peningkatan Investasi Surabaya 2026: Capaian Target Semester I
-                </h2>
-                <p class="text-slate-300 text-sm md:text-base line-clamp-2">
-                    Analisis mendalam mengenai pertumbuhan ekonomi dan sektor unggulan di Kota Surabaya.
-                </p>
-            </div>
-        </div>
-
-        <div class="card-side">
-            <div class="h-1/2 news-card-tilt bg-slate-900 flex flex-col justify-end" data-tilt>
-                <div class="p-8">
-                    <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest">Pengumuman</span>
-                    <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">
-                        Panduan Terbaru Pengurusan Izin Usaha Mikro & Kecil
-                    </h3>
-                    <div class="mt-4 w-12 h-1 bg-yellow-400 rounded"></div>
+<section class="container mx-auto px-6 -mt-12 pb-16">
+        <div class="collage-container">
+            <div class="card-main news-card-tilt" data-tilt data-tilt-max="5">
+                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" class="absolute inset-0 w-full h-full object-cover" alt="">
+                <div class="image-overlay"></div>
+                <div class="absolute bottom-0 p-10 z-20">
+                    <span class="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold mb-4 inline-block">BERITA UTAMA</span>
+                    <h2 class="text-3xl font-bold text-white mb-2">Peningkatan Investasi Surabaya 2026: Capaian Target Semester I</h2>
                 </div>
             </div>
-            
-            <div class="h-1/2 news-card-tilt bg-blue-700 flex flex-col justify-end" data-tilt>
-                <div class="p-8">
-                    <span class="text-white/70 text-xs font-bold uppercase tracking-widest">Data Statistik</span>
-                    <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">
-                        Rekapitulasi Layanan DPMPTSP Bulan Maret 2026
-                    </h3>
-                    <div class="mt-4 w-12 h-1 bg-white/30 rounded"></div>
+            <div class="card-side">
+                <div class="h-1/2 news-card-tilt bg-slate-900" data-tilt>
+                    <div class="p-8">
+                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest">Pengumuman</span>
+                        <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">Panduan Terbaru Pengurusan Izin Usaha Mikro & Kecil</h3>
+                    </div>
+                </div>
+                <div class="h-1/2 news-card-tilt bg-blue-700" data-tilt>
+                    <div class="p-8">
+                        <span class="text-white/70 text-xs font-bold uppercase tracking-widest">Data Statistik</span>
+                        <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">Rekapitulasi Layanan DPMPTSP Bulan Maret 2026</h3>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 <section class="py-16 bg-white"> <div class="container mx-auto px-4"> <div class="text-center mb-12"> <div class="flex items-center justify-center mb-6"> <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"> <i class="fas fa-lightbulb text-white text-xl"></i> </div> <h2 class="text-3xl font-bold text-blue-800">Inovasi Layanan</h2> </div> <p class="text-gray-600 max-w-2xl mx-auto">Berbagai inovasi layanan yang dikembangkan untuk meningkatkan kualitas pelayanan kepada masyarakat</p> </div> <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"> <!-- Lapis Lupis --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/lapis_lupis_baru.png" alt="Lapis Lupis" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Lapis Lupis</h4> </div> </a> <!-- MPP Virtual --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://mpp.surabaya.go.id/mppvirtual/skin/Image_7DB3C373_7065_34DE_41BA_CF5206137DED.png?v=1696700959324" alt="MPP Virtual" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">MPP Virtual</h4> </div> </a> <!-- Pesona Buaya --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/Pesona%20Buaya.png" alt="Pesona Buaya" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Pesona Buaya</h4> </div> </a> <!-- WPP --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/WPP.png" alt="WPP" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">WPP</h4> </div> </a> <!-- Takon Sobat --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/TAKON-SOBAT.png" alt="Takon Sobat" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Takon Sobat</h4> </div> </a> <!-- Wani Ngurus Izin --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/Wani%20Ngurus%20Izin.jpeg" alt="Wani Ngurus Izin" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Wani Ngurus Izin</h4> </div> </a> </div> </div> </section>
 
    
