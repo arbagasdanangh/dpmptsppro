@@ -8,154 +8,95 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+             body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc; 
+            color: #1e293b; 
+            overflow-x: hidden; 
+        }
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; overflow-x: hidden; }
+        /* Glass Navigation */
+        .glass-nav { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(0,0,0,0.05); 
+        }
 
+        /* Hero Mesh Background */
         .hero-mesh {
-            background-color: #0f172a;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
-        }
-
-        .search-container {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .search-container:focus-within {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
-        }
-
-        .news-card {
-            transition: all 0.5s ease;
-            transform-style: preserve-3d;
-        }
-
-        .pagination-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .pagination-btn:active { transform: scale(0.9); }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            background: radial-gradient(circle at 0% 0%, #0f172a 0%, #1e293b 100%);
+            position: relative; 
             overflow: hidden;
         }
-        /* Penyesuaian untuk Gambar Portrait */
-.card-main img {
-    object-fit: cover;
-    object-position: center 20%; /* Memastikan bagian atas gambar (wajah/kepala) lebih terlihat */
-}
 
-@media (min-width: 1024px) {
-    /* Mengubah proporsi: Main card 7 kolom, Side card 5 kolom agar lebih seimbang untuk portrait */
-    .card-main { grid-column: span 7; height: 600px; } 
-    .card-side { grid-column: span 5; height: 600px; }
-}
-    </style>
-<script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-
-    <style>
-        /* --- CORE COLLAGE LAYOUT --- */
-        .collage-wrapper {
+        /* --- COLLAGE SYSTEM --- */
+        .collage-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(2, 350px);
             gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .card-main { grid-column: span 8; grid-row: span 2; }
-        .card-sub { grid-column: span 4; grid-row: span 1; }
-
-        @media (max-width: 1024px) {
-            .collage-wrapper { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .card-main, .card-sub { grid-column: span 1; height: 450px; }
-        }
-
-        /* --- TILT CARD STYLE --- */
         .news-card-tilt {
-            position: relative;
-            border-radius: 2.5rem;
+            position: relative; 
+            border-radius: 2.5rem; 
             overflow: hidden;
             background: #0f172a;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
             cursor: pointer;
-            transform-style: preserve-3d; /* Penting untuk efek 3D */
         }
 
-        .image-bg-tilt {
+        /* Logic Fokus Gambar */
+        .img-layer {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.4;
-            transition: all 0.6s ease;
+            transition: transform 0.8s ease, opacity 0.5s ease;
         }
 
-        .news-card-tilt:hover .image-bg-tilt {
-            opacity: 0.6;
-            transform: scale(1.1);
+        /* Gambar Portrait Utama (Kiri) */
+        .img-portrait { 
+            object-position: center 15%; 
+            opacity: 0.6; 
         }
 
-        .content-area-tilt {
-            position: absolute;
+        /* Gambar Samping (Kanan) */
+        .img-landscape { 
+            object-position: center center; 
+            opacity: 0.4; 
+        }
+
+        .news-card-tilt:hover .img-layer {
+            transform: scale(1.08);
+            opacity: 0.8;
+        }
+
+        .image-overlay {
+            position: absolute; 
             inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2.5rem;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 70%);
-            transform: translateZ(50px); /* Membuat teks melayang */
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 50%, transparent 100%);
+            z-index: 10;
         }
 
-        /* --- LAYER TEXT DECORATION --- */
-        .bg-layer-blue {
-            background: #0ea5e9;
-            color: white;
-            padding: 0.2rem 0.8rem;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            font-weight: 800;
+        /* Desktop Layout (7:5 Split) */
+        .card-left { grid-column: span 7; height: 800px; }
+        .card-right-group { grid-column: span 5; display: flex; flex-direction: column; gap: 1.5rem; height: 800px; }
+        .right-item { flex: 1; }
+
+        @media (max-width: 1024px) {
+            .collage-grid { grid-template-columns: 1fr; }
+            .card-left, .card-right-group { grid-column: span 12; height: auto; }
+            .card-left { height: 550px; }
+            .right-item { height: 350px; }
         }
 
-        .bg-layer-yellow {
-            background: #fbbf24;
-            color: #000;
-            padding: 0.2rem 0.8rem;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            font-weight: 800;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&amp;display=swap" rel="stylesheet">
-    
-<style>
-    /* Animasi melayang yang lebih halus */
-    @keyframes bounce-slow {
-        0%, 100% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(-15px) scale(1.02); }
-    }
-    .animate-bounce-slow {
-        animation: bounce-slow 4s infinite ease-in-out;
-    }
-
-    /* Efek gradasi bergerak pada teks */
-    .animate-gradient-x {
-        background-size: 200% 200%;
-        animation: gradient-move 5s ease infinite;
-    }
-    @keyframes gradient-move {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+        /* Utility */
+        .text-glow { text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     <style>
@@ -402,33 +343,56 @@
         </nav>
     </div>
 </header>
-    
- <section class="hero-mesh pt-32 pb-24 px-6">
+    <section class="hero-mesh pt-40 pb-28 px-6">
         <div class="container mx-auto text-center relative z-10">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">Pusat <span class="text-blue-400">Informasi</span> & Inovasi</h1>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Akses cepat berita terbaru dan berbagai inovasi layanan digital DPMPTSP Surabaya.</p>
+            <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-400 uppercase bg-blue-400/10 rounded-full border border-blue-400/20">Official Media Hub</span>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                Pusat <span class="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">Informasi</span> Digital
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
+                Menyajikan data real-time, pengumuman terbaru, dan transparansi layanan publik Kota Surabaya.
+            </p>
         </div>
     </section>
-<section class="container mx-auto px-6 -mt-12 pb-16">
-        <div class="collage-container">
-            <div  data-tilt data-tilt-max="5">
-                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" class="absolute inset-0 w-full h-full object-cover" alt="">
+
+    <section class="container mx-auto px-6 -mt-20 pb-24">
+        <div class="collage-grid">
+            
+            <div class="card-left news-card-tilt shadow-2xl shadow-blue-900/20" data-tilt data-tilt-max="3" data-tilt-glare="true" data-tilt-max-glare="0.2">
+                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" 
+                     class="img-layer img-portrait" alt="Takon Sobat">
                 <div class="image-overlay"></div>
-            </div>
-            <div class="card-side">
-                <div class="h-1/2 news-card-tilt bg-slate-900" data-tilt>
-                    <div class="p-8">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest">Pengumuman</span>
-                        <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">Panduan Terbaru Pengurusan Izin Usaha Mikro & Kecil</h3>
-                    </div>
-                </div>
-                <div class="h-1/2 news-card-tilt bg-blue-700" data-tilt>
-                    <div class="p-8">
-                        <span class="text-white/70 text-xs font-bold uppercase tracking-widest">Data Statistik</span>
-                        <h3 class="text-xl font-bold text-white mt-4 leading-relaxed">Rekapitulasi Layanan DPMPTSP Bulan Maret 2026</h3>
-                    </div>
+                <div class="absolute bottom-0 p-10 md:p-14 z-20">
+                    
                 </div>
             </div>
+
+            <div class="card-right-group">
+                <div class="right-item news-card-tilt flex flex-col justify-end p-10 shadow-xl" data-tilt data-tilt-max="4">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" 
+                         class="img-layer img-landscape" alt="Data Investasi">
+                    <div class="image-overlay"></div>
+                    <div class="relative z-20">
+                        <span class="bg-amber-500 text-black px-3 py-1 rounded-md text-[10px] font-black uppercase mb-4 inline-block">Data Update</span>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+                            Realisasi Investasi Semester I 2026 Melampaui Target Tahunan
+                        </h3>
+                    </div>
+                </div>
+                
+                <div class="right-item news-card-tilt flex flex-col justify-end p-10 shadow-xl" data-tilt data-tilt-max="4">
+                    <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&q=80&w=800" 
+                         class="img-layer img-landscape" alt="Sosialisasi Izin">
+                    <div class="image-overlay"></div>
+                    <div class="relative z-20">
+                        <span class="bg-emerald-500 text-white px-3 py-1 rounded-md text-[10px] font-black uppercase mb-4 inline-block">Panduan</span>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+                            Kemudahan Izin Usaha Mikro Melalui Integrasi Sistem SSW ALFA
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 <section class="py-16 bg-white"> <div class="container mx-auto px-4"> <div class="text-center mb-12"> <div class="flex items-center justify-center mb-6"> <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"> <i class="fas fa-lightbulb text-white text-xl"></i> </div> <h2 class="text-3xl font-bold text-blue-800">Inovasi Layanan</h2> </div> <p class="text-gray-600 max-w-2xl mx-auto">Berbagai inovasi layanan yang dikembangkan untuk meningkatkan kualitas pelayanan kepada masyarakat</p> </div> <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"> <!-- Lapis Lupis --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/lapis_lupis_baru.png" alt="Lapis Lupis" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Lapis Lupis</h4> </div> </a> <!-- MPP Virtual --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://mpp.surabaya.go.id/mppvirtual/skin/Image_7DB3C373_7065_34DE_41BA_CF5206137DED.png?v=1696700959324" alt="MPP Virtual" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">MPP Virtual</h4> </div> </a> <!-- Pesona Buaya --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/Pesona%20Buaya.png" alt="Pesona Buaya" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Pesona Buaya</h4> </div> </a> <!-- WPP --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/WPP.png" alt="WPP" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">WPP</h4> </div> </a> <!-- Takon Sobat --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/TAKON-SOBAT.png" alt="Takon Sobat" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Takon Sobat</h4> </div> </a> <!-- Wani Ngurus Izin --> <a href="https://www.instagram.com/dpmptspsby" target="_blank" class="innovation-card"> <div class="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-yellow-400 transition duration-300"> <img src="https://epmal.surabaya.go.id/simpedal/assets2/Wani%20Ngurus%20Izin.jpeg" alt="Wani Ngurus Izin" class="w-full h-24 object-contain mb-4"> <h4 class="font-bold text-blue-800">Wani Ngurus Izin</h4> </div> </a> </div> </div> </section>
