@@ -1,229 +1,59 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kinerja DPM-PTSP Surabaya</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .hero-bg {
-            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            top: 20%;
-            left: -5%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-        .map-card {
-            border: 3px solid #fbbf24;
-            border-radius: 1.5rem;
-        }
-        .btn-yellow {
-            background-color: #ffcc00;
-        }
-    </style>
-<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
-    <title>DPMPTSP Kota Surabaya | Portal Resmi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kinerja DPM-PTSP Surabaya | Official Portal</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
     <style>
-        /* --- CORE COLLAGE LAYOUT --- */
-        .collage-wrapper {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(2, 350px);
-            gap: 1.5rem;
-        }
-
-        .card-main { grid-column: span 8; grid-row: span 2; }
-        .card-sub { grid-column: span 4; grid-row: span 1; }
-
-        @media (max-width: 1024px) {
-            .collage-wrapper { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .card-main, .card-sub { grid-column: span 1; height: 450px; }
-        }
-
-        /* --- TILT CARD STYLE --- */
-        .news-card-tilt {
-            position: relative;
-            border-radius: 2.5rem;
-            overflow: hidden;
-            background: #0f172a;
-            cursor: pointer;
-            transform-style: preserve-3d; /* Penting untuk efek 3D */
-        }
-
-        .image-bg-tilt {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            transition: all 0.6s ease;
-        }
-
-        .news-card-tilt:hover .image-bg-tilt {
-            opacity: 0.6;
-            transform: scale(1.1);
-        }
-
-        .content-area-tilt {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2.5rem;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 70%);
-            transform: translateZ(50px); /* Membuat teks melayang */
-        }
-
-        /* --- LAYER TEXT DECORATION --- */
-        .bg-layer-blue {
-            background: #0ea5e9;
-            color: white;
-            padding: 0.2rem 0.8rem;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            font-weight: 800;
-        }
-
-        .bg-layer-yellow {
-            background: #fbbf24;
-            color: #000;
-            padding: 0.2rem 0.8rem;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            font-weight: 800;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-<style>
-    /* Animasi melayang yang lebih halus */
-    @keyframes bounce-slow {
-        0%, 100% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(-15px) scale(1.02); }
-    }
-    .animate-bounce-slow {
-        animation: bounce-slow 4s infinite ease-in-out;
-    }
-
-    /* Efek gradasi bergerak pada teks */
-    .animate-gradient-x {
-        background-size: 200% 200%;
-        animation: gradient-move 5s ease infinite;
-    }
-    @keyframes gradient-move {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfdfd; }
         
-        /* --- SLIDER CORE --- */
-        #slide-track { transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1); }
-        .active-slide img { animation: kenburns 20s infinite alternate; }
-        @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.2) translate(20px, 10px); } }
-        
-        .slide-content > * {
-            opacity: 0; transform: translateY(40px) skewY(2deg);
-            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .active-slide .slide-content > * { opacity: 1; transform: translateY(0) skewY(0deg); }
-        .active-slide .slide-content h2 { transition-delay: 0.3s; }
-        .active-slide .slide-content p { transition-delay: 0.5s; }
-        .active-slide .slide-content .btn-group { transition-delay: 0.7s; }
-
-        .indicator-bar { height: 4px; width: 40px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; border-radius: 2px; }
-        .indicator-progress { position: absolute; height: 100%; width: 0; background: #FFD41D; transition: width 0.1s linear; }
-
-        /* --- COLLAGE NEWS SECTION --- */
-        .collage-wrapper {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(2, 350px);
-            gap: 1.5rem;
-            max-width: 1300px;
-            width: 100%;
-            margin: 0 auto;
+        /* Hero Styling */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
             position: relative;
         }
-        .card-main { grid-column: span 8; grid-row: span 2; }
-        .card-sub { grid-column: span 4; grid-row: span 1; }
-
-        .news-card-tilt {
-            position: relative; border-radius: 2.5rem; overflow: hidden;
-            background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s;
-            cursor: pointer; box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.15);
+        
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
         }
 
-        .bg-layer-blue { background: #0ea5e9; color: white; padding: 0.2rem 0.8rem; box-decoration-break: clone; -webkit-box-decoration-break: clone; font-weight: 800; }
-        .bg-layer-yellow { background: #fbbf24; color: #000; padding: 0.2rem 0.8rem; box-decoration-break: clone; -webkit-box-decoration-break: clone; font-weight: 800; }
-
-        .image-bg-tilt {
-            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.35; filter: grayscale(40%) contrast(1.1); transition: all 0.7s ease;
-        }
-        .news-card-tilt:hover .image-bg-tilt { opacity: 0.55; filter: grayscale(0%); transform: scale(1.1); }
-
-        .content-area-tilt {
-            position: absolute; inset: 0; display: flex; flex-direction: column;
-            justify-content: flex-end; padding: 2.5rem;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, transparent 70%);
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
-        @media (max-width: 1024px) {
-            .collage-wrapper { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .card-main, .card-sub { grid-column: span 1; height: 400px; }
+        /* Tilt Card Styling */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
         }
+
+        .map-glow {
+            box-shadow: 0 0 40px rgba(30, 64, 175, 0.15);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
     </style>
-    <style>
-    .bg-layer-blue {
-        background: #0ea5e9;
-        color: white;
-        /* Tambahkan padding kiri-kanan dan atur jarak antar baris */
-        padding: 0.4rem 1rem; 
-        line-height: 1.8; /* Biar antar baris ada spasi, nggak mepet */
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
-        font-weight: 800;
-        display: inline; /* Penting biar padding-nya konsisten di tiap baris */
-    }
-    
-    /* Area konten kita kasih padding lebih besar agar tidak mepet frame */
-    .content-area-tilt {
-        padding: 3.5rem !important; 
-    }
-</style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased text-slate-800">
 
-<header id="navbar" class="fixed top-0 left-0 right-0 z-[100] bg-white/95 backdrop-blur-xl transition-all duration-300 border-b-4 border-blue-900">
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-[100] bg-white/95 backdrop-blur-xl transition-all duration-300 border-b-4 border-blue-900">
     <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center relative">
         
         <div class="flex items-center">
@@ -345,95 +175,136 @@
         </nav>
     </div>
 </header>
-
-    <section class="hero-bg py-20 text-center text-white">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Kinerja DPM-PTSP Surabaya</h1>
-        <p class="text-blue-100 opacity-90 mb-6">Informasi Kinerja</p>
-        <div class="flex justify-center">
-            <i class="fa-solid fa-chevron-down text-yellow-400 text-xl animate-bounce"></i>
+    <section class="hero-gradient pt-40 pb-24 text-white overflow-hidden">
+        <div class="hero-pattern"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1 rounded-full mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
+                <span class="text-[10px] font-bold tracking-[0.2em] uppercase">Update Kinerja 2026</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-tight">
+                Transparansi <br> <span class="text-blue-300 italic">Tanpa Batas.</span>
+            </h1>
+            <p class="text-lg text-blue-100/80 max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+                Menyediakan akses data real-time untuk mendukung ekosistem investasi yang sehat dan akuntabel di Kota Surabaya.
+            </p>
+            <div class="flex justify-center gap-4">
+                <i class="fa-solid fa-circle-chevron-down text-3xl text-yellow-400 animate-bounce cursor-pointer"></i>
+            </div>
         </div>
     </section>
 
-    <section class="py-20 max-w-7xl mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl font-bold text-blue-800 mb-6">Peta Potensi Investasi Surabaya</h2>
-                <p class="text-gray-600 leading-relaxed mb-6">
-                    Temukan peluang investasi di berbagai sektor unggulan Kota Surabaya melalui peta interaktif kami. Surabaya menawarkan berbagai potensi investasi dari sektor industri, perdagangan, jasa, hingga pariwisata.
+    <section class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1">
+                <h2 class="text-4xl font-black text-blue-900 mb-6 leading-tight uppercase italic">
+                    Mapping <span class="text-blue-600">The Future</span>
+                </h2>
+                <p class="text-slate-600 mb-8 leading-relaxed text-lg">
+                    Analisis mendalam mengenai sektor unggulan. Kami memetakan potensi investasi mulai dari manufaktur hingga pariwisata dalam format yang interaktif dan mudah diakses.
                 </p>
-                <p class="text-gray-600 leading-relaxed mb-8 italic">
-                    Rencana Strategis 2021-2026 kami dirancang untuk memberikan panduan investasi yang komprehensif dan informasi sektor unggulan di setiap kawasan tertentu.
-                </p>
-                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
-                    Jelajahi Peta Interaktif <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                
+                <div class="space-y-4 mb-10">
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-blue-50 border border-blue-100 transition hover:bg-blue-100 cursor-default">
+                        <i class="fa-solid fa-check-circle text-blue-600 text-xl"></i>
+                        <span class="font-bold text-blue-900">Data Strategis 2021 - 2026</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 transition hover:bg-slate-100 cursor-default">
+                        <i class="fa-solid fa-check-circle text-blue-600 text-xl"></i>
+                        <span class="font-bold text-blue-900">Sektor Industri & Perdagangan</span>
+                    </div>
+                </div>
+
+                <button class="group relative bg-blue-600 text-white px-8 py-4 rounded-2xl font-black flex items-center gap-3 shadow-2xl shadow-blue-200 hover:bg-blue-700 transition-all active:scale-95">
+                    Explore Peta Interaktif
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
                 </button>
             </div>
-            
-            <div class="relative">
-                <div class="map-card bg-blue-500 p-2 shadow-2xl overflow-hidden aspect-[4/3] flex items-center justify-center relative">
-                    <img src="https://img.freepik.com/free-vector/indonesia-map-with-colorful-provinces_23-2148784260.jpg" alt="Peta" class="w-full h-full object-cover rounded-xl">
-                    
-                    <div class="absolute top-4 right-4 bg-yellow-400 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
-                        <i class="fa-solid fa-location-dot text-blue-900"></i>
+
+            <div class="order-1 lg:order-2">
+                <div class="tilt-card map-glow bg-white p-3 rounded-[2.5rem] relative" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                    <div class="bg-blue-900 rounded-[2rem] overflow-hidden aspect-video relative group">
+                        <img src="https://img.freepik.com/free-vector/indonesia-map-with-colorful-provinces_23-2148784260.jpg" alt="Map" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent"></div>
+                        
+                        <div class="absolute top-1/4 left-1/3 bg-yellow-400 p-2 rounded-full shadow-lg animate-float">
+                            <i class="fa-solid fa-location-dot text-blue-900"></i>
+                        </div>
+                        <div class="absolute bottom-1/3 right-1/4 bg-blue-400 p-2 rounded-full shadow-lg animate-float" style="animation-delay: 1s">
+                            <i class="fa-solid fa-chart-line text-white"></i>
+                        </div>
                     </div>
-                    <div class="absolute bottom-4 left-4 bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
-                        <i class="fa-solid fa-chart-pie text-white text-xs"></i>
+                    <div class="absolute -top-6 -right-6 bg-yellow-400 w-20 h-20 rounded-full flex items-center justify-center text-blue-900 shadow-xl border-8 border-white">
+                        <i class="fa-solid fa-bolt text-2xl"></i>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-white">
-        <div class="text-center mb-16 px-6">
-            <h2 class="text-3xl font-bold text-blue-800 mb-4">Aplikasi DPM-PTSP</h2>
-            <p class="text-gray-500">Dukung investasi dan kemudahan berusaha dengan aplikasi terintegrasi kami</p>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col justify-between">
+    <section class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-briefcase text-blue-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-blue-900 mb-4">Lapor.go.id</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        Aplikasi pengaduan masyarakat berbasis mobile dan web untuk mengakomodir kebutuhan laporan komprehensif mengenai prosedur, regulasi, dan investasi.
-                    </p>
+                    <h2 class="text-4xl font-black text-blue-900 tracking-tight uppercase italic">Aplikasi <span class="text-blue-500">Pilihan</span></h2>
+                    <p class="text-slate-500 mt-2 font-medium">Layanan publik dalam satu ekosistem digital terpadu.</p>
                 </div>
-                <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-blue-700 transition-all">
-                    <i class="fa-solid fa-file-pdf"></i> Buka Dokumen
-                </button>
+                <div class="h-1 bg-blue-200 flex-grow mx-8 hidden md:block mb-4 rounded-full"></div>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-chart-line text-yellow-600"></i>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="tilt-card bg-white p-10 rounded-[3rem] border border-slate-200/50 shadow-xl shadow-slate-200/30 flex flex-col items-start transition hover:border-blue-300" data-tilt data-tilt-scale="1.02">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 text-blue-600 text-2xl">
+                        <i class="fa-solid fa-handshake"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-900 mb-4">Wargaku</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        Aplikasi layanan warga Surabaya berbasis mobile dan web untuk membantu kebutuhan administrasi dan perizinan dasar.
-                    </p>
-                </div>
+                    <h3 class="text-2xl font-black text-blue-900 mb-4 tracking-tight">Lapor.go.id</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Aduan masyarakat secara mobile untuk transparansi prosedur dan regulasi daerah.</p>
+                    <button class="mt-auto flex items-center gap-2 text-blue-600 font-bold hover:gap-4 transition-all uppercase text-xs tracking-widest">
+                        Buka Dokumen <i class="fa-solid fa-arrow-right"></i>
+                    </button>
                 </div>
 
-            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-file-lines text-blue-600"></i>
+                <div class="tilt-card bg-blue-900 p-10 rounded-[3rem] text-white shadow-2xl shadow-blue-900/20 flex flex-col items-start" data-tilt data-tilt-scale="1.02">
+                    <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-8 text-yellow-400 text-2xl border border-white/10">
+                        <i class="fa-solid fa-users"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-900 mb-4">SIPPN</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        Sistem Informasi Pengelolaan Pengaduan Nasional untuk pelayanan publik dan panduan pengisian Laporan Kegiatan Penanaman Modal (LKPM).
-                    </p>
+                    <h3 class="text-2xl font-black mb-4 tracking-tight">Wargaku</h3>
+                    <p class="text-blue-100/70 leading-relaxed mb-8">Pusat layanan warga Surabaya untuk urusan administrasi dan perizinan harian.</p>
+                    <div class="mt-auto px-4 py-1.5 bg-yellow-400 text-blue-900 rounded-full text-[10px] font-black uppercase tracking-widest">
+                        Paling Populer
+                    </div>
                 </div>
-                <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-blue-700 transition-all">
-                    <i class="fa-solid fa-file-pdf"></i> Buka Dokumen
-                </button>
+
+                <div class="tilt-card bg-white p-10 rounded-[3rem] border border-slate-200/50 shadow-xl shadow-slate-200/30 flex flex-col items-start transition hover:border-blue-300" data-tilt data-tilt-scale="1.02">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 text-blue-600 text-2xl">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-blue-900 mb-4 tracking-tight">SIPPN</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Panduan resmi Laporan Kegiatan Penanaman Modal (LKPM) bagi pelaku usaha.</p>
+                    <button class="mt-auto flex items-center gap-2 text-blue-600 font-bold hover:gap-4 transition-all uppercase text-xs tracking-widest">
+                        Buka Dokumen <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
+    <footer class="bg-white py-12 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase">
+                &copy; 2026 DPM-PTSP Kota Surabaya. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Inisialisasi Vanilla Tilt secara manual jika diperlukan (opsional karena sudah pakai data-tilt)
+        VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+            max: 8,
+            speed: 500,
+            glare: true,
+            "max-glare": 0.1,
+        });
+    </script>
 </body>
 </html>
