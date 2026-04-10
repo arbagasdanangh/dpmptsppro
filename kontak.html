@@ -405,32 +405,148 @@
             </p>
         </div>
     </section>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pusat Informasi - DPMPTSP Surabaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
-    <section class="container mx-auto px-6 -mt-32 pb-24 relative z-30">
-    <div class="collage-grid">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc; 
+        }
+
+        /* Container Utama Grid */
+        .collage-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Kiri lebih lebar (rasio desain) */
+            gap: 1.5rem;
+            height: 650px; /* Tinggi total area collage */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Kartu Base */
+        .news-card-tilt {
+            position: relative;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            background: #0f172a;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Penanganan Gambar agar tidak kepotong/gepeng */
+        .img-fit {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* KUNCI UTAMA */
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .news-card-tilt:hover .img-fit {
+            transform: scale(1.05);
+        }
+
+        /* Overlay Gradasi agar teks terbaca */
+        .overlay-grad {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.2) 60%, transparent 100%);
+            z-index: 10;
+        }
+
+        /* Layout Samping (Kanan) */
+        .side-stack {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Efek Teks ala Desain Modern */
+        .text-layer {
+            position: relative;
+            z-index: 20;
+            padding: 2.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .badge-blue {
+            background: #0ea5e9;
+            color: white;
+            padding: 4px 12px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .collage-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .card-main { height: 450px; }
+            .card-sub { height: 300px; }
+        }
+    </style>
+</head>
+<body class="p-6 md:p-20">
+
+    <section class="collage-container">
         
-        <div class="card-left news-card-tilt shadow-2xl shadow-blue-900/20" data-tilt data-tilt-max="3">
-            <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" class="img-layer" alt="Takon Sobat">
-            <div class="image-overlay"></div>
-            <div class="absolute bottom-0 p-8 z-20">
-                <span class="bg-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase text-blue-900">Layanan Baru</span>
+        <div class="news-card-tilt card-main" data-tilt data-tilt-max="3">
+            <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/TAKONSOBAT.jpg" class="img-fit" alt="Takon Sobat">
+            <div class="overlay-grad"></div>
+            <div class="text-layer">
+                <div>
+                    <span class="badge-blue uppercase text-xs">Layanan Digital</span>
+                </div>
+                <h2 class="text-white text-3xl font-extrabold leading-tight">
+                    Konsultasi Izin via <br> WhatsApp "Takon Sobat"
+                </h2>
             </div>
         </div>
 
-        <div class="card-right-group">
-            <div class="right-item news-card-tilt shadow-xl" data-tilt data-tilt-max="4">
-                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/struktur-pengaduan-2024.jpeg" class="img-layer" alt="Struktur Pengaduan">
-                <div class="image-overlay"></div>
+        <div class="side-stack">
+            <div class="news-card-tilt card-sub" data-tilt data-tilt-max="5">
+                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/struktur-pengaduan-2024.jpeg" class="img-fit" alt="Struktur">
+                <div class="overlay-grad"></div>
+                <div class="text-layer p-6">
+                    <h3 class="text-white text-xl font-bold">Alur Pengaduan Masyarakat</h3>
+                </div>
             </div>
-            
-            <div class="right-item news-card-tilt shadow-xl" data-tilt data-tilt-max="4">
-                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/penanggungjawab-pengaduan-2025.jpeg" class="img-layer" alt="Penanggung Jawab">
-                <div class="image-overlay"></div>
+
+            <div class="news-card-tilt card-sub" data-tilt data-tilt-max="5">
+                <img src="https://dpm-ptsp.surabaya.go.id/tentangfile/penanggungjawab-pengaduan-2025.jpeg" class="img-fit" alt="Tim">
+                <div class="overlay-grad"></div>
+                <div class="text-layer p-6">
+                    <h3 class="text-white text-xl font-bold">Tim Koordinasi Pengaduan</h3>
+                </div>
             </div>
         </div>
 
-    </div>
-</section>
+    </section>
+
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".news-card-tilt"), {
+            max: 5,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+        });
+    </script>
+</body>
+</html>
 <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
